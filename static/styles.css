@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2c3e50;
+  background-image: linear-gradient(to bottom right, #2c3e50, #34495e);
+  color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.final-vote-text {
+  text-align: center; /* Center align the text */
+  margin-bottom: 20px; /* Space between text and images */
+  color: #ffffff; /* Text color */
+}
+
+.final-vote-text h2 {
+  font-size: 2em; /* Adjust font size */
+  margin: 0; /* Remove default margin */
+}
+
+.image-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-item {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper img {
+  border: 5px solid #f7da7d;
+  border-radius: 8%;
+  padding: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.image-container img {
+  width: 500px; /* Fixed width */
+  height: 800px; /* Fixed height */
+  object-fit: cover; /* Ensures image is cropped to fill area */
+  display: block;
+  margin: 0 auto;
+}
+
+.vote-button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #fdfdfd;
+  color: black;
+  border: none;
+  border-radius: 5px;
+}
+
+.vote-button:hover {
+  background-color: #f7da7d;
+}
+
+/* responsive layout by adjusting image sizes and spacing based on the viewport width */
+@media (max-width: 1200px) {
+  .image-container {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-container img {
+    width: 100%; /* Ensure the image fills its container */
+    height: auto; /* Adjust the height */
+    max-width: 500px; /* Still limits the maximum width */
+  }
+
+  .image-container {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .image-item img {
+    width: 100%; /* Full width on small screens */
+    height: auto; /* Adjust height automatically */
+  }
+}
+
+/* Candidate name styling */
+.candidate-name {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust to center */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border: 5px solid #f0a174;
+}
+
+.modal.open {
+  display: flex; /* Show modal */
+  opacity: 1;
+  background-image: url("/static/images/background.jpg");
+  background-size: cover; /* Cover the modal */
+  background-position: center; /* Center the background */
+}
+
+.modal-image-container {
+  display: flex; /* Use flexbox for horizontal layout */
+  justify-content: center; /* Center images */
+  align-items: center; /* Center vertically */
+  gap: 20px; /* Space between images */
+  flex-wrap: wrap; /* Allow wrapping if necessary */
+}
+
+.modal-image-item {
+  display: flex; /* Ensure each image item is a flex container */
+  flex-direction: column; /* Align items in a column */
+  align-items: center; /* Center the image within */
+}
+
+.confirmation-text {
+  margin-bottom: 15px; /* Space between text and images */
+  font-size: 2.5em; /* Adjust font size */
+  color: #ffffff; /* Text color */
+}
+
+.modal-image-item img {
+  width: 600px; /* Fixed width for images */
+  height: 800px; /* Fixed height for images */
+  object-fit: cover; /* Cover the area, maintaining aspect ratio */
+  border: 5px solid #f7da7d; /* Optional: for rounded corners */
+}
+
+@media (max-width: 2200px) {
+  .modal-image-item img {
+    width: 400px;
+    height: 600px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .modal-image-item img {
+    width: 300px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .modal-image-item img {
+    width: 150px;
+    height: 200px;
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Space between buttons */
+}
+
+.modal-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px; /* Fixed width for buttons */
+}
+
+.confirm {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.cancel {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.modal-button:hover {
+  opacity: 0.8;
+}
+
+.like-button {
+  background: none; /* Remove default button background */
+  border: none; /* Remove border */
+  cursor: pointer; /* Change cursor to pointer */
+  outline: none; /* Remove outline */
+  width: 50px; /* Size of the button */
+  height: 50px; /* Size of the button */
+}
+
+.heart {
+  width: 100%;
+  height: 100%;
+  fill: #ffffff; /* Default color */
+  transition: fill 0.3s; /* Smooth color transition */
+}
+
+.like-button.liked .heart {
+  fill: #f71717; /* Change color when liked */
+}

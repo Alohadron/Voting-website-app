@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to HotChick Voting!</title>
+    <style>
+      /* Reset default browser styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #2c3e50; /* Dark blue background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+        color: #fff;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        border: 2px solid #f7da7d; /* Golden border */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #f39c12; /* Golden text */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.8;
+        text-align: justify;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-align: left;
+        color: #f39c12; /* Golden label color */
+      }
+
+      select,
+      input {
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 2px solid #f7da7d; /* Golden borders for inputs */
+        border-radius: 5px;
+        font-size: 1rem;
+        width: 100%;
+        background-color: #f2f2f2; /* Light background color for inputs */
+        color: #333;
+      }
+
+      select:focus,
+      input:focus {
+        outline: none;
+        border-color: #f39c12; /* Darker focus border */
+      }
+
+      button {
+        background-color: #f39c12; /* Golden button */
+        color: white;
+        padding: 12px;
+        font-size: 1.1rem;
+        border: 2px solid #d35400; /* Darker border */
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, border 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #d35400;
+        border: 2px solid #e67e22;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 0.85rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to "Hottest Actress" Project!</h1>
+      <p>
+        In this voting app, you will be presented with 9 talented actresses.
+        Select the one who stands out the most for you. After three rounds of
+        voting, the top 3 will advance to the final round, where your ultimate
+        decision will determine the winner of the project!"
+      </p>
+      <p>
+        After the final vote, you will be redirected to the result page, where
+        you'll see who leads the competition, which candidates got the most
+        regular votes, and the actress with the most likes!
+      </p>
+
+      <form id="userForm" action="/main" method="POST">
+        <label for="sex">Select your gender:</label>
+        <select id="sex" name="sex" required>
+          <option value="">--Please choose an option--</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="age">Enter your age:</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          required
+          min="1"
+          max="120"
+          placeholder="Enter your age"
+        />
+
+        <button type="submit">Proceed to Voting</button>
+      </form>
+
+      <footer>© 2024 Hot Actress Voting. All Rights Reserved.</footer>
+    </div>
+  </body>
+</html>

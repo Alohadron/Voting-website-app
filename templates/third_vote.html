@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Image Display</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="image-container">
+      {% if images %} {% for image in images %}
+      <div class="image-item">
+        <div class="candidate-name">{{ image.candidate_name }}</div>
+        <div class="image-wrapper">
+          <img
+            src="{{ url_for('static', filename=image.image_url) }}"
+            alt="Image from database"
+          />
+        </div>
+        <button class="vote-button" data-candidate-id="{{ image.id }}">
+          Vote
+        </button>
+      </div>
+      {% endfor %} {% else %}
+      <p>No images found.</p>
+      {% endif %}
+    </div>
+
+    <div class="modal">
+      <div class="modal-image-item">
+        <h3 class="confirmation-text">Are you sure?</h3>
+        <div class="modal-image-container"></div>
+        <div class="button-container">
+          <button class="modal-button confirm">Confirm</button>
+          <button class="modal-button cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

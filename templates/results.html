@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Results</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #162e3d;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+
+      /* Main Results Title Styling */
+      h1 {
+        text-align: center;
+        color: #ffffff;
+        background-color: #f39c12;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 2rem;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        width: 50%;
+        margin: 20px auto;
+        border: 2px solid #f7da7d;
+      }
+
+      /* Container for Supreme Votes and Other Sections */
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .votes-container {
+        width: 80%;
+        margin: 0 auto 30px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Styling for the section titles */
+      h2 {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #f39c12;
+        position: relative;
+        text-align: center; /* Center the h2 titles */
+      }
+
+      h2::before {
+        content: "";
+        display: block;
+        width: 50%;
+        height: 2px;
+        background-color: #f7da7d;
+        margin: 10px auto;
+      }
+
+      /* Styling the candidate votes and tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #ebafeb;
+      }
+
+      .candidate-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      /* Image Grid for Likes */
+      .image-grid {
+        display: table;
+        width: 80%;
+        background-color: #ffffff;
+        border-spacing: 15px;
+        border-collapse: separate;
+      }
+
+      .image-grid-row {
+        display: table-row;
+      }
+
+      .image-grid-cell {
+        display: table-cell;
+        width: 33.33%;
+        padding: 10px;
+        background-color: #ebafeb;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .image-grid-cell img {
+        max-width: 95%;
+        height: 300px;
+        object-fit: cover;
+        border: 5px solid #f7da7d;
+        border-radius: 8%;
+        padding: 1px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .like-count {
+        font-weight: bold;
+        color: #333;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Results</h1>
+
+    <h2>Supreme Votes</h2>
+    <div class="container">
+      <!-- Supreme Votes Table -->
+      <div class="votes-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Supreme Votes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for candidate in candidates|sort(attribute=2, reverse=true) %}
+            <tr>
+              <td>
+                <img
+                  src="{{ url_for('static', filename='/' + candidate[3]) }}"
+                  alt="Candidate Image"
+                  class="candidate-image"
+                />
+                {{ candidate[0] }}
+              </td>
+              <td>{{ candidate[2] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>The Most Often Chosen</h2>
+      <!-- Candidate Votes Section -->
+      <div class="votes-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Votes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for candidate in candidates|sort(attribute=1, reverse=true) %}
+            <tr>
+              <td>
+                <img
+                  src="{{ url_for('static', filename='/' + candidate[3]) }}"
+                  alt="Candidate Image"
+                  class="candidate-image"
+                />
+                {{ candidate[0] }}
+              </td>
+              <td>{{ candidate[1] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Most Liked Images Section -->
+      <h2>The Most Liked Images</h2>
+      <div class="image-grid">
+        {% for row in candidate_images|batch(3) %}
+        <div class="image-grid-row">
+          {% for image in row %}
+          <div class="image-grid-cell">
+            <img src="{{ image.img }}" alt="Candidate Image" />
+            <div class="like-count">Likes: {{ image['likes'] }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
